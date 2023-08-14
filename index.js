@@ -22,13 +22,13 @@ app.post('/signup',(req,res)=>{
    const userDetails=req.body;
    let existingEmail=userEmails.find(user=>user.email===userDetails.email);
    if(existingEmail){
-    res.status(404).send('Email Already Exists');
+    res.status(404).json({message:'Email Already Exists'});
    }
    else{
     
     userEmails.push(userDetails)
     fs.writeFileSync('UserEmails.json', JSON.stringify(userEmails));
-    res.status(201).send("Email Sent!")
+    res.status(201).json({message:'Email Sent'})
    }
 
 })
